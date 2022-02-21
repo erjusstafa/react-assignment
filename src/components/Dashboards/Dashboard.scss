@@ -1,0 +1,24 @@
+.sidebar-custom {
+  background: #037a90 !important;
+  z-index: 2000 !important;
+  width: 105px !important;
+}
+
+.sidebar-custom-not-login {
+  background: #037a90 !important;
+  z-index: 1000 !important;
+  width: 105px !important;
+}
+
+.header-custom,
+.content-custom {
+  padding-left: 122px !important;
+}
+
+.modal-custom {
+  z-index: 3000 !important;
+}
+
+.react-calendar__tile--now {
+  background: #ffffff;
+}
