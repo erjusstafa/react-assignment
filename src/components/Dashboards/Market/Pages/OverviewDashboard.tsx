@@ -85,6 +85,13 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       marginBottom: 10,
     },
+    mapIframe: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      width: '100%',
+      height: '100%',
+    },
     mapContainer: {
       [theme.breakpoints.up('xs')]: {
         height: 580,
@@ -303,8 +310,7 @@ const OverviewDashboard = ({
     link.href = url;
     link.setAttribute(
       'download',
-      `${
-        search.data && search.data.name ? search.data.name.replaceAll(' ', '_') : 'exported'
+      `${search.data && search.data.name ? search.data.name.replaceAll(' ', '_') : 'exported'
       }_data.csv`
     );
     document.body.appendChild(link);
@@ -323,8 +329,8 @@ const OverviewDashboard = ({
   };
 
   const [active, setActive] = useState({
-    map: false,
-    list: true,
+    map: true,
+    list: false,
   });
 
   const [revCalVals, setRevCalVals] = useState({
@@ -385,7 +391,14 @@ const OverviewDashboard = ({
   return (
     <Grid container direction="column" spacing={2}>
       {/* Universal view*/}
-      <Grid container direction="column" justifyContent="center" alignItems="center" spacing={2} item>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        item
+      >
         <ButtonGroup variant="contained" size={matches ? 'small' : 'medium'}>
           <InfoTooltip
             title={
@@ -787,6 +800,16 @@ const OverviewDashboard = ({
                         disableColumnFilter={true}
                         disableColumnMenu={true}
                       />
+                    </div>
+                  )}
+
+                  {!search.loading && active.map && (
+                    <div style={{ height: '100%', position: 'relative' }}>
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47935.68508846973!2d19.782803841625714!3d41.33104134446396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1350310470fac5db%3A0x40092af10653720!2sTirana%2C%20Albania!5e0!3m2!1sen!2s!4v1645613558635!5m2!1sen!2s"
+                        title="Tirana, Albania"
+                        className={classes.mapIframe}
+                      ></iframe>
                     </div>
                   )}
                 </Paper>

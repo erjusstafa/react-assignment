@@ -41,6 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
 const CustomSwitch = ({ active, setActive }: CustomSwitchPropTypes) => {
   const classes = useStyles();
 
+  //Here, I've created a function , where has like purpose to make a switch button. 
+  // In this function I set a parameter to control that if the Map button has a boolean value equal with true , 
+  //then the List buutton  has the opposite value to Map button.
+  //After that , I call the function below in the code
+  const handleActiveButton = (item: boolean) => {
+    setActive({
+      ...active,
+      map: item,
+      list: !item,
+    });
+  };
+
   return (
     <Paper className={classes.switchOuterContainer}>
       <Grid
@@ -55,6 +67,7 @@ const CustomSwitch = ({ active, setActive }: CustomSwitchPropTypes) => {
             [classes.switchActive]: active.map,
             [classes.switch]: !active.map,
           })}
+          onClick={() => handleActiveButton(true)}
         >
           <LocationOnTwoToneIcon
             className={clsx({
@@ -69,7 +82,7 @@ const CustomSwitch = ({ active, setActive }: CustomSwitchPropTypes) => {
             [classes.switchActive]: active.list,
             [classes.switch]: !active.list,
           })}
-          onClick={() => setActive({ map: false, list: true })}
+          onClick={() => handleActiveButton(false)}
         >
           <ListTwoToneIcon
             className={clsx({
