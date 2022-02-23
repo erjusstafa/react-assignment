@@ -96,6 +96,9 @@ const getChangeTooltip = (title: string) => {
   if (title.includes('Median Nightly Rate')) {
     return "This month's Median Nightly Rate compared to last month's";
   }
+  if (title.includes('Revenue Rate')) {
+    return "This month's Revenue Rate compared to last month's";
+  }
   return '';
 };
 
@@ -105,6 +108,10 @@ export const getYAxistName = (titleVal: string) => {
   }
   if (titleVal.includes('Median Nightly Rate')) {
     return 'Median Nightly Rate';
+  }
+
+  if (titleVal.includes('Revenue Rate')) {
+    return 'Revenue Rate';
   }
   return '';
 };
@@ -120,12 +127,16 @@ const getUnit = (titleVal: string) => {
   if (titleVal.includes('Median Nightly Rate')) {
     return '$';
   }
+  if (titleVal.includes('Revenue Rate')) {
+    return '$';
+  }
   return '';
 };
 const parseGraphVal = (values: ADR[] | OccupancyRate[], yAxis: string, today: Date) => {
   let returnVal: {
     'Median Nightly Rate'?: number;
     'Occupancy Rate'?: number;
+    'Revenue Rate'?:number;
     timePeriod: string;
   }[] = [];
 
@@ -171,6 +182,20 @@ const parseGraphVal = (values: ADR[] | OccupancyRate[], yAxis: string, today: Da
     return returnVal;
   }
 
+
+  if (yAxis == 'Revenue Rate') {
+    let occupancyRates = values.slice(values.length - 12);
+    for (let occupancyRateObject of occupancyRates) {
+      returnVal.push({
+        timePeriod:
+          monthNames[parseInt(occupancyRateObject['date'].split('-')[1]) - 1] +
+          ', ' +
+          occupancyRateObject['date'].split('-')[0],
+        [yAxis]: occupancyRateObject['occupancy_rate'],
+      });
+    }
+    return returnVal;
+  }
   console.log('Oops something went wrong. Check DigestCard element');
   return returnVal;
 };
@@ -261,6 +286,16 @@ const DigestCard = ({
     rate = (averageDailyRateSum / graphData.length).toFixed(0);
   }
 
+  if (title.includes('Revenue Rate')) {
+    let averageDailyRateSum = 0;
+    for (let x in graphData) {
+      averageDailyRateSum = averageDailyRateSum + (graphData[x]['Revenue Rate'] as number);
+    }
+    rate = (averageDailyRateSum / graphData.length).toFixed(0);
+  }
+
+  
+
   const [referPoint, referValue] = useMemo(() => {
     let referPointCalc = 0;
     let referValueCalc = 0;
@@ -273,6 +308,11 @@ const DigestCard = ({
     if (title.includes('Occupancy Rate') && graphData.length > 0) {
       referPointCalc = graphData.length - 1;
       referValueCalc = graphData[graphData.length - 1]['Occupancy Rate'] as number;
+    }
+
+    if (title.includes('Revenue Rate') && graphData.length > 0) {
+      referPointCalc = graphData.length - 1;
+      referValueCalc = graphData[graphData.length - 1]['Revenue Rate'] as number;
     }
 
     return [referPointCalc, referValueCalc];
@@ -300,6 +340,10 @@ const DigestCard = ({
     'Occupancy Rate': [
       `The past 12 months' average occupancy rate of listings on the map.`,
       `Occupancy Rate = Number of booked days / Number of available days`,
+    ],
+    'Revenue Rate': [
+      `The past 12 months' Revenue Rate of listings on the map.`,
+      `Revenue = ((Nightly Rate + Extra Guest Fees) x Number of Booked Nights) + (Cleaning Fees x Number of bookings)`,
     ],
   };
 

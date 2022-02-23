@@ -252,6 +252,9 @@ const OverviewDashboard = ({
 
   let listViewData: ListViewData[] = [];
 
+  console.log("visibleListings.data",visibleListings.data);
+  
+
   if (!visibleListings.loading && !visibleVRBOListings.loading) {
     dynamicADR = getDynamicADR(visibleListings.data);
     dynamicExtraFees = getDynamicExtraFees(visibleListings.data);
@@ -553,6 +556,22 @@ const OverviewDashboard = ({
               title="Median Nightly Rate"
               data={dynamicADR}
               color={COLOR_ACCENT_2}
+              isDisabled={isDisabled}
+              multipleMarkersCallLoading={multipleMarkersCallLoading}
+              dynamicTrigger={dynamicTrigger}
+              setSubscriptionModalOpen={setSubscriptionModalOpen}
+            />
+          )}
+        </Grid>
+
+        <Grid item xs={12} md={4} lg={4}>
+          {listings.loading || visibleListings.loading ? (
+            <LoadingCard color={COLOR_ACCENT_2} height={150} />
+          ) : (
+            <DigestCard
+              title="Revenue Rate"
+              data={dynamicADR}
+              color={COLOR_ACCENT_1}
               isDisabled={isDisabled}
               multipleMarkersCallLoading={multipleMarkersCallLoading}
               dynamicTrigger={dynamicTrigger}
