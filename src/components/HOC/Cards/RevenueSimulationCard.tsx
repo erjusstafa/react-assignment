@@ -263,15 +263,15 @@ const RevenueSimulationCard = ({
           12,
         annualExpenses: Math.round(
           (subfieldValues.managementFee / 100) * values.annualRevenue +
-            (subfieldValues.lodgingTax / 100) * values.annualRevenue +
-            (subfieldValues.propertyTax / 100) * values.annualRevenue +
-            subfieldValues.mortgageFees +
-            subfieldValues.cleaningFeesExpenses +
-            subfieldValues.maintenance +
-            subfieldValues.insurance +
-            subfieldValues.utilities +
-            subfieldValues.hoaFees +
-            subfieldValues.other
+          (subfieldValues.lodgingTax / 100) * values.annualRevenue +
+          (subfieldValues.propertyTax / 100) * values.annualRevenue +
+          subfieldValues.mortgageFees +
+          subfieldValues.cleaningFeesExpenses +
+          subfieldValues.maintenance +
+          subfieldValues.insurance +
+          subfieldValues.utilities +
+          subfieldValues.hoaFees +
+          subfieldValues.other
         ),
         startupCosts:
           subfieldValues.homeFurnishings +
@@ -475,13 +475,39 @@ const RevenueSimulationCard = ({
                                 onChange={e => handleSubfieldValueChange(subfield.key, e)}
                                 type="number"
                                 error={!subfieldValues[subfield.key]}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      {subfield.unit}
-                                    </InputAdornment>
-                                  ),
-                                }}
+                                //this bug I will fix using conditional rendering. If subfield.unit === '$' display "$" symbol in the begin ,
+                                // otherwise if subfield.unit !== '$' display  other symbol (in this case is "%" symbol) in the end.
+                                InputProps={
+                                  subfield.unit === '$'
+                                    ? {
+                                      startAdornment: (
+                                        <InputAdornment position="start">
+                                          {subfield.unit}
+                                        </InputAdornment>
+                                      ),
+                                    }
+                                    : {
+                                      endAdornment: (
+                                        <InputAdornment position="start">
+                                          {subfield.unit}
+                                        </InputAdornment>
+                                      ),
+                                    }
+                                }
+                              //other solution using condition rendering
+
+                              /*  InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    {subfield.unit === "$" && subfield.unit}
+                                  </InputAdornment>
+                                ),
+                                endAdornment: (
+                                  <InputAdornment position="start">
+                                  {subfield.unit === "%" && subfield.unit}
+                                  </InputAdornment>
+                                ),
+                              }} */
                               />
                             </Grid>
                           ))}
