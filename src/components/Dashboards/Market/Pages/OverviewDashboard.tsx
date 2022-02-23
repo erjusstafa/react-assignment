@@ -802,7 +802,7 @@ const OverviewDashboard = ({
                       />
                     </div>
                   )}
-
+                  {/**if active.map is equal with true , display the map */}
                   {!search.loading && active.map && (
                     <div style={{ height: '100%', position: 'relative' }}>
                       <iframe
@@ -812,6 +812,7 @@ const OverviewDashboard = ({
                       ></iframe>
                     </div>
                   )}
+                  {console.log("search.loading", search.loading)}
                 </Paper>
               </CardContent>
             </Card>
