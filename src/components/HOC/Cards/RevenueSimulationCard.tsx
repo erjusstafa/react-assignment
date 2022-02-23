@@ -475,8 +475,8 @@ const RevenueSimulationCard = ({
                                 onChange={e => handleSubfieldValueChange(subfield.key, e)}
                                 type="number"
                                 error={!subfieldValues[subfield.key]}
-                                //this bug I will fix using conditional rendering. If subfield.unit === '$' display "$" symbol in the begin ,
-                                // otherwise if subfield.unit !== '$' display  other symbol (in this case is "%" symbol) in the end.
+                                //this bug I  fixed using conditional rendering. If subfield.unit === '$' display "$" symbol in the left side ,
+                                // otherwise if subfield.unit !== '$' display  other symbol (in this case is "%" symbol) in the right side.
                                 InputProps={
                                   subfield.unit === '$'
                                     ? {
@@ -494,7 +494,7 @@ const RevenueSimulationCard = ({
                                       ),
                                     }
                                 }
-                              //other solution using condition rendering
+                              //other solution 
 
                               /*  InputProps={{
                                 startAdornment: (
