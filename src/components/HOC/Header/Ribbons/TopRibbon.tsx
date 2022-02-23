@@ -184,7 +184,7 @@ const TopRibbon = ({
         item
         container
         spacing={4}
-        justify="flex-end"
+        justifyContent="flex-end"
         alignItems="center"
         className={classes.container}
       >
@@ -252,7 +252,7 @@ const TopRibbon = ({
       <Grid
         item
         container
-        justify="space-between"
+        justifyContent="space-between"
         alignItems="center"
         className={classes.mobileHeader}
       >

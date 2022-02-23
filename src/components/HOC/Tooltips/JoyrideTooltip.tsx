@@ -58,7 +58,7 @@ const JoyrideTooltip = ({
       </CardContent>
       {!step.hideFooter && (
         <CardActions style={{ background: COLOR_TOOLTIP_BACKGROUND }}>
-          <Grid container direction="row" justify="space-between">
+          <Grid container direction="row" justifyContent="space-between">
             {index > 0 && (
               <Button className={classes.customButtonReversed} {...backProps}>
                 Back

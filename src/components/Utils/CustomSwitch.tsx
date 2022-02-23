@@ -46,7 +46,7 @@ const CustomSwitch = ({ active, setActive }: CustomSwitchPropTypes) => {
       <Grid
         container
         direction="row"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
         className={classes.switchInnerContainer}
       >

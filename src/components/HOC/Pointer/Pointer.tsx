@@ -162,7 +162,7 @@ const Pointer = ({
                 {yearString} {monthName} Performance{' '}
               </Typography>{' '}
               <br />
-              <Grid container direction="row" justify="space-between" alignItems="center">
+              <Grid container direction="row" justifyContent="space-between" alignItems="center">
                 <Grid>
                   <Typography color="textPrimary" variant="h6" align="center">
                     {data.adr && data.occupancy_rate && data.revenue ? (
@@ -293,7 +293,7 @@ const Pointer = ({
                             <Grid
                               container
                               direction="row"
-                              justify="space-between"
+                              justifyContent="space-between"
                               alignItems="center"
                             >
                               <Grid>
@@ -361,7 +361,7 @@ const Pointer = ({
                               </Grid>
                             </Grid>
                           ) : (
-                            <Grid container direction="row" justify="center" alignItems="center">
+                            <Grid container direction="row" justifyContent="center" alignItems="center">
                               <Typography color="textSecondary" variant="h6" align="center">
                                 Inactive
                               </Typography>

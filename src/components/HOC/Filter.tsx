@@ -359,14 +359,14 @@ const Filter = ({
             <Grid
               container
               direction="column"
-              justify="flex-start"
+              justifyContent="flex-start"
               alignItems="flex-start"
               className={classes.filterContainer}
             >
               <Grid
                 container
                 direction="column"
-                justify="flex-start"
+                justifyContent="flex-start"
                 alignItems="flex-start"
                 className={classes.filterContainer}
                 style={{ marginTop: -20 }}
@@ -386,7 +386,7 @@ const Filter = ({
               <Grid
                 container
                 direction="row"
-                justify="flex-start"
+                justifyContent="flex-start"
                 alignItems="flex-start"
                 className={classes.filterContainer}
               >
@@ -414,7 +414,7 @@ const Filter = ({
               <Grid
                 container
                 direction="row"
-                justify="flex-start"
+                justifyContent="flex-start"
                 alignItems="flex-start"
                 className={classes.filterContainer}
               >
@@ -458,7 +458,7 @@ const Filter = ({
               <Grid
                 container
                 direction="row"
-                justify="flex-start"
+                justifyContent="flex-start"
                 alignItems="flex-start"
                 className={classes.filterContainer}
               >
@@ -502,7 +502,7 @@ const Filter = ({
               <Grid
                 container
                 direction="row"
-                justify="flex-start"
+                justifyContent="flex-start"
                 alignItems="flex-start"
                 className={classes.filterContainer}
               >
@@ -605,7 +605,7 @@ const Filter = ({
           <Grid
             container
             direction="row"
-            justify="flex-start"
+            justifyContent="flex-start"
             alignItems="center"
             // className={classes.filterContainer}
           >

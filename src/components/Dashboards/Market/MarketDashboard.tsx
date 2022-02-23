@@ -610,7 +610,7 @@ const MarketDashboard = ({
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             style={{ minHeight: '100vh' }}
           >
             <div className={`${classes.signupModal} modal-custom`}>
@@ -646,14 +646,14 @@ const MarketDashboard = ({
               spacing={0}
               direction="column"
               alignItems="center"
-              justify="center"
+              justifyContent="center"
               style={{ minHeight: '100vh' }}
             >
               <div className={`${classes.paperModal} modal-custom`}>
                 <Grid
                   container
                   direction="row"
-                  justify="space-evenly"
+                  justifyContent="space-evenly"
                   alignItems="center"
                   style={{ marginTop: 20 }}
                 >
@@ -664,7 +664,7 @@ const MarketDashboard = ({
                 <Grid
                   container
                   direction="row"
-                  justify="space-evenly"
+                  justifyContent="space-evenly"
                   alignItems="center"
                   style={{ marginTop: 15, marginBottom: 30 }}
                 >
@@ -679,7 +679,7 @@ const MarketDashboard = ({
                 <Grid
                   container
                   direction="row"
-                  justify="space-evenly"
+                  justifyContent="space-evenly"
                   alignItems="center"
                   style={{ marginTop: 50, marginBottom: 20 }}
                 >
@@ -708,21 +708,21 @@ const MarketDashboard = ({
               spacing={0}
               direction="column"
               alignItems="center"
-              justify="center"
+              justifyContent="center"
               style={{ minHeight: '100vh' }}
             >
               <div className={`${classes.warningModal} modal-custom`}>
                 <Grid
                   container
                   direction="row"
-                  justify="space-evenly"
+                  justifyContent="space-evenly"
                   alignItems="center"
                   style={{ marginBottom: 30 }}
                 >
                   <Typography variant="subtitle1">Would you like to unlock this market?</Typography>
                 </Grid>
 
-                <Grid container direction="row" justify="space-evenly" alignItems="center">
+                <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                   <Button
                     className={classes.customButtonReversed}
                     onClick={() => setShowSearchCreditDeductWarningModal(false)}

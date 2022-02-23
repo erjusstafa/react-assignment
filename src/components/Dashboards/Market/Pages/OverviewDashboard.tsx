@@ -385,7 +385,7 @@ const OverviewDashboard = ({
   return (
     <Grid container direction="column" spacing={2}>
       {/* Universal view*/}
-      <Grid container direction="column" justify="center" alignItems="center" spacing={2} item>
+      <Grid container direction="column" justifyContent="center" alignItems="center" spacing={2} item>
         <ButtonGroup variant="contained" size={matches ? 'small' : 'medium'}>
           <InfoTooltip
             title={
@@ -674,7 +674,7 @@ const OverviewDashboard = ({
       {/* Laptop & Tablet view */}
 
       {!matches && (
-        <Grid container direction="row" justify="space-between" item>
+        <Grid container direction="row" justifyContent="space-between" item>
           <Grid container direction="column" spacing={2} item xs={12} md={6} lg={4}>
             {(overviewDashboardMode.showInvesting || overviewDashboardMode.showRentalArbitrage) && (
               <Grid item>

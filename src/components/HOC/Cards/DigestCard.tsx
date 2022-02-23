@@ -359,7 +359,7 @@ const DigestCard = ({
             </InfoTooltip>
           </Grid>
 
-          <Grid item container xs={6} justify="flex-end">
+          <Grid item container xs={6} justifyContent="flex-end">
             <Grid container item xs={12} style={{ position: 'relative', top: '0', left: '0' }}>
               <ResponsiveContainer height={100} width="100%">
                 <LineChart data={graphData} style={blurGraph}>

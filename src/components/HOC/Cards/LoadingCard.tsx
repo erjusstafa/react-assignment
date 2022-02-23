@@ -9,7 +9,7 @@ const LoadingCard = ({ color, height }: LoadingCardPropTypes) => {
         <Grid
           container
           direction="row"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           style={{ height: height }}
         >
