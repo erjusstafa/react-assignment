@@ -9,6 +9,7 @@ import {
   COLOR_ACCENT_2,
   outerCoords,
   COLOR_TOOLTIP_BACKGROUND,
+  COLOR_YELLOW,
 } from 'src/const';
 
 import {
@@ -252,9 +253,6 @@ const OverviewDashboard = ({
 
   let listViewData: ListViewData[] = [];
 
-  console.log("visibleListings.data",visibleListings.data);
-  
-
   if (!visibleListings.loading && !visibleVRBOListings.loading) {
     dynamicADR = getDynamicADR(visibleListings.data);
     dynamicExtraFees = getDynamicExtraFees(visibleListings.data);
@@ -313,7 +311,8 @@ const OverviewDashboard = ({
     link.href = url;
     link.setAttribute(
       'download',
-      `${search.data && search.data.name ? search.data.name.replaceAll(' ', '_') : 'exported'
+      `${
+        search.data && search.data.name ? search.data.name.replaceAll(' ', '_') : 'exported'
       }_data.csv`
     );
     document.body.appendChild(link);
@@ -564,14 +563,15 @@ const OverviewDashboard = ({
           )}
         </Grid>
 
+        {/*  Revenue Card */}
         <Grid item xs={12} md={4} lg={4}>
           {listings.loading || visibleListings.loading ? (
-            <LoadingCard color={COLOR_ACCENT_2} height={150} />
+            <LoadingCard color={COLOR_YELLOW} height={150} />
           ) : (
             <DigestCard
-              title="Revenue Rate"
-              data={dynamicADR}
-              color={COLOR_ACCENT_1}
+              title="Revenue"
+              data={dynamicRev}
+              color={COLOR_YELLOW}
               isDisabled={isDisabled}
               multipleMarkersCallLoading={multipleMarkersCallLoading}
               dynamicTrigger={dynamicTrigger}
@@ -831,7 +831,6 @@ const OverviewDashboard = ({
                       ></iframe>
                     </div>
                   )}
-                  {console.log("search.loading", search.loading)}
                 </Paper>
               </CardContent>
             </Card>

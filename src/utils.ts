@@ -644,37 +644,35 @@ export const getDynamicOccupancyRate = (listings: Listing[]) => {
 export const getDynamicRev = (listings: Listing[]) => {
   let dynamicRev: Revenue[] = [];
   // implement this
+  //to write those lines of codes I relied on how the other two cards were constructed
   let revenyRateCount: number[] = [];
-  if(listings.length > 0){
+  if (listings.length > 0) {
     listings[0].revenue.map((adrObj, index) => {
-      dynamicRev[index]={
-        date : adrObj.date,
-        revenue  : 0,
-      }
+      dynamicRev[index] = {
+        date: adrObj.date,
+        revenue: 0,
+      };
       revenyRateCount[index] = 0;
-    })
+    });
 
-    listings.map((listing:Listing) =>{
-      for(let index= 0; index < 12; index++){
+    listings.map((listing: Listing) => {
+      for (let index = 0; index < 12; index++) {
         dynamicRev[index].date = listing.adr[index].date;
-        if(listing.revenue[index].revenue != -1){
+        if (listing.revenue[index].revenue != -1) {
           dynamicRev[index].revenue += listing.revenue[index].revenue;
-          revenyRateCount[index] += 1
+          revenyRateCount[index] += 1;
         }
-
       }
-    })
+    });
 
     dynamicRev.map((revenyRateObj, index) => {
-      if(revenyRateCount[index] != 0) {
-        revenyRateObj.revenue = Math.round(
-          revenyRateObj.revenue/revenyRateCount[index]
-          )
+      //round the number by division (revObj.revenue / revCount[index])
+      if (revenyRateCount[index] != 0) {
+        revenyRateObj.revenue = Math.round(revenyRateObj.revenue / revenyRateCount[index]);
       }
-    })
+    });
   }
 
-  
   return dynamicRev;
 };
 

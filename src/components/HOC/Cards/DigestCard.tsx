@@ -21,7 +21,7 @@ import { TooltipCard } from '.';
 import InfoTooltip from '../Tooltips/InfoTooltip';
 import { infoIconStyle } from '../../Dashboards/Market/styles/style';
 import { COLOR_PRIMARY_DARK, COLOR_E, COLOR_TOOLTIP_BACKGROUND } from 'src/const';
-import { ADR, OccupancyRate } from 'src/interfaces/idashboard';
+import { ADR, OccupancyRate, Revenue } from 'src/interfaces/idashboard';
 import { DigestCardPropTypes } from 'src/interfaces/iproptypes';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -96,8 +96,8 @@ const getChangeTooltip = (title: string) => {
   if (title.includes('Median Nightly Rate')) {
     return "This month's Median Nightly Rate compared to last month's";
   }
-  if (title.includes('Revenue Rate')) {
-    return "This month's Revenue Rate compared to last month's";
+  if (title.includes('Revenue')) {
+    return "This month's Revenue compared to last month's";
   }
   return '';
 };
@@ -110,8 +110,8 @@ export const getYAxistName = (titleVal: string) => {
     return 'Median Nightly Rate';
   }
 
-  if (titleVal.includes('Revenue Rate')) {
-    return 'Revenue Rate';
+  if (titleVal.includes('Revenue')) {
+    return 'Revenue';
   }
   return '';
 };
@@ -127,16 +127,16 @@ const getUnit = (titleVal: string) => {
   if (titleVal.includes('Median Nightly Rate')) {
     return '$';
   }
-  if (titleVal.includes('Revenue Rate')) {
+  if (titleVal.includes('Revenue')) {
     return '$';
   }
   return '';
 };
-const parseGraphVal = (values: ADR[] | OccupancyRate[], yAxis: string, today: Date) => {
+const parseGraphVal = (values: ADR[] | OccupancyRate[] | Revenue[], yAxis: string, today: Date) => {
   let returnVal: {
     'Median Nightly Rate'?: number;
     'Occupancy Rate'?: number;
-    'Revenue Rate'?:number;
+    Revenue?: number;
     timePeriod: string;
   }[] = [];
 
@@ -182,16 +182,17 @@ const parseGraphVal = (values: ADR[] | OccupancyRate[], yAxis: string, today: Da
     return returnVal;
   }
 
-
-  if (yAxis == 'Revenue Rate') {
-    let occupancyRates = values.slice(values.length - 12);
-    for (let occupancyRateObject of occupancyRates) {
+  //This function is to display data in  linear line to revenue card.
+  // When we hover the mouse on the card, it will display the data for each month
+  if (yAxis == 'Revenue') {
+    let revenueRates = values.slice(values.length - 12);
+    for (let revenueRateObject of revenueRates) {
       returnVal.push({
         timePeriod:
-          monthNames[parseInt(occupancyRateObject['date'].split('-')[1]) - 1] +
+          monthNames[parseInt(revenueRateObject['date'].split('-')[1]) - 1] +
           ', ' +
-          occupancyRateObject['date'].split('-')[0],
-        [yAxis]: occupancyRateObject['occupancy_rate'],
+          revenueRateObject['date'].split('-')[0],
+        [yAxis]: revenueRateObject['revenue'],
       });
     }
     return returnVal;
@@ -286,15 +287,14 @@ const DigestCard = ({
     rate = (averageDailyRateSum / graphData.length).toFixed(0);
   }
 
-  if (title.includes('Revenue Rate')) {
+  //with these linne code we will get the avarage rate
+  if (title.includes('Revenue')) {
     let averageDailyRateSum = 0;
     for (let x in graphData) {
-      averageDailyRateSum = averageDailyRateSum + (graphData[x]['Revenue Rate'] as number);
+      averageDailyRateSum = averageDailyRateSum + (graphData[x]['Revenue'] as number);
     }
     rate = (averageDailyRateSum / graphData.length).toFixed(0);
   }
-
-  
 
   const [referPoint, referValue] = useMemo(() => {
     let referPointCalc = 0;
@@ -310,9 +310,9 @@ const DigestCard = ({
       referValueCalc = graphData[graphData.length - 1]['Occupancy Rate'] as number;
     }
 
-    if (title.includes('Revenue Rate') && graphData.length > 0) {
+    if (title.includes('Revenue') && graphData.length > 0) {
       referPointCalc = graphData.length - 1;
-      referValueCalc = graphData[graphData.length - 1]['Revenue Rate'] as number;
+      referValueCalc = graphData[graphData.length - 1]['Revenue'] as number;
     }
 
     return [referPointCalc, referValueCalc];
@@ -341,8 +341,8 @@ const DigestCard = ({
       `The past 12 months' average occupancy rate of listings on the map.`,
       `Occupancy Rate = Number of booked days / Number of available days`,
     ],
-    'Revenue Rate': [
-      `The past 12 months' Revenue Rate of listings on the map.`,
+    Revenue: [
+      `The past 12 months' Revenue of listings on the map.`,
       `Revenue = ((Nightly Rate + Extra Guest Fees) x Number of Booked Nights) + (Cleaning Fees x Number of bookings)`,
     ],
   };
