@@ -647,6 +647,7 @@ export const getDynamicRev = (listings: Listing[]) => {
   //to write those lines of codes I relied on how the other two cards were constructed
   let revenyRateCount: number[] = [];
   if (listings.length > 0) {
+    //using map method to get date in each array 
     listings[0].revenue.map((adrObj, index) => {
       dynamicRev[index] = {
         date: adrObj.date,
@@ -657,8 +658,11 @@ export const getDynamicRev = (listings: Listing[]) => {
 
     listings.map((listing: Listing) => {
       for (let index = 0; index < 12; index++) {
+        // On each array to dynamicRev.date take the values of the listing.adr[index].date
         dynamicRev[index].date = listing.adr[index].date;
         if (listing.revenue[index].revenue != -1) {
+          //if the condition is met  then ,
+          // every  value of dynamicRev.revenue will incremment with the value of  listing.revenue[index].revenue
           dynamicRev[index].revenue += listing.revenue[index].revenue;
           revenyRateCount[index] += 1;
         }
@@ -666,13 +670,15 @@ export const getDynamicRev = (listings: Listing[]) => {
     });
 
     dynamicRev.map((revenyRateObj, index) => {
-      //round the number by division (revObj.revenue / revCount[index])
+      //takes the round  number by division (revObj.revenue / revCount[index])
       if (revenyRateCount[index] != 0) {
         revenyRateObj.revenue = Math.round(revenyRateObj.revenue / revenyRateCount[index]);
       }
     });
   }
 
+  console.log("listings",listings);
+  
   return dynamicRev;
 };
 
